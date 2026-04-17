@@ -2472,11 +2472,11 @@ If app continuously polls server → may NEVER reach networkidle.
 
 # ⚖️ Comparison Table
 
-|Option|Waits For DOM|Waits Images/CSS|Waits API|Best For|
-|---|---|---|---|---|
-|`domcontentloaded`|✅ Yes|❌ No|❌ No|Fast DOM checks|
-|`load`|✅ Yes|✅ Yes|❌ No|Traditional sites|
-|`networkidle`|✅ Yes|✅ Yes|✅ Yes|API-heavy apps ⭐|
+| Option             | Waits For DOM | Waits Images/CSS | Waits API | Best For          |
+| ------------------ | ------------- | ---------------- | --------- | ----------------- |
+| `domcontentloaded` | ✅ Yes         | ❌ No             | ❌ No      | Fast DOM checks   |
+| `load`             | ✅ Yes         | ✅ Yes            | ❌ No      | Traditional sites |
+| `networkidle`      | ✅ Yes         | ✅ Yes            | ✅ Yes     | API-heavy apps ⭐  |
 
 ---
 

@@ -7,8 +7,9 @@ Here’s a **clean, execution-focused Markdown checklist** you can directly copy
 ## 🧠 Weekly Strategy Overview
 
 * [ ] Week 1: Problem Awareness (Hook startup pain)
-	
-* [ ] Week 2: Authority (Show expertise)
+
+* Mang[ ] Week 2: Authority (Show expertise)
+
 * [ ] Week 3: Proof (Case studies & results)
 * [ ] Week 4: Conversion (Get calls & leads)
 
@@ -16,7 +17,8 @@ Here’s a **clean, execution-focused Markdown checklist** you can directly copy
 
 # 📅 WEEK 1 — Problem Awareness
 
-* [x] Day 1 — Why most startups break in production (not dev issue) 15 Apr
+* [X] Day 1 — Why most startups break in production (not dev issue) 15 Apr
+
 ```text
 Most startups don’t break in production because of bad code.
 
@@ -65,7 +67,9 @@ Follow me @VaibhaV Arde for practical insights on Agentic AI QA and building sca
 
 #TestAutomation #Startups #QualityEngineering
 ```
-* [x] Day 2 — Your CI/CD is lying (tests pass, users fail) 16 Apr
+
+* [X] Day 2 — Your CI/CD is lying (tests pass, users fail) 16 Apr
+
 ```
 Your CI/CD pipeline is green.
 
@@ -132,7 +136,9 @@ Follow me @VaibhaV Arde for practical insights on Agentic AI QA and building sca
 
 #CI_CD #TestAutomation #QualityEngineering
 ```
-* [x] Day 3 — Manual QA is slowing your releases 17 Apr
+
+* [X] Day 3 — Manual QA is slowing your releases 17 Apr
+
 ```
 Manual QA isn’t really improving your quality anymore.
 
@@ -185,7 +191,9 @@ Curious — how much of your regression is still manual right now?
 
 Follow me @VaibhaV Arde for practical insights on Agentic AI QA and building scalable test automation systems.
 ```
-* [x] Day 4 — Hidden cost of 2–3 day regression cycles 18 Apr
+
+* [X] Day 4 — Hidden cost of 2–3 day regression cycles 18 Apr
+
 ```
 2–3 day regression cycles don’t look like a big problem at first.
 
@@ -244,7 +252,9 @@ Curious — how long does regression actually take in your setup right now?
 
 Follow me @VaibhaV Arde for practical insights on Agentic AI QA and building scalable test automation systems.
 ```
-* [x] Day 5 — Top 5 test automation mistakes 19 Apr
+
+* [X] Day 5 — Top 5 test automation mistakes 19 Apr
+
 ```
 Most test automation doesn’t really fail because of tools.
 
@@ -260,19 +270,19 @@ Here’s what I keep seeing again and again:
 
 1. Starting with UI tests for everything  
     Feels right in the beginning, but quickly turns slow and flaky
-    
+  
 2. Treating automation like a QA-only job  
     Devs don’t touch it, so ownership becomes messy
-    
+  
 3. Running after coverage numbers  
     Lots of tests, but core user flows still break
-    
+  
 4. No real thought about test data  
     Works fine in staging, then production behaves completely differently
-    
+  
 5. No structure from day one  
     Tests just grow randomly, and maintenance becomes painful later
-    
+  
 
 If you look closely, it’s the same issue underneath
 
@@ -297,7 +307,9 @@ Curious — which of these have you run into in your team?
 
 Follow me @VaibhaV Arde for practical insights on Agentic AI QA and building scalable test automation systems.
 ```
+
 * [ ] Day 6 — Why hiring more testers doesn’t fix quality 20 Apr
+
 ```
 Hiring more testers doesn’t really fix quality.
 
@@ -352,6 +364,7 @@ Curious — have you tried scaling QA and still felt stuck?
 
 Follow me @VaibhaV Arde for practical insights on Agentic AI QA and building scalable test automation systems.
 ```
+
 * [ ] Day 7 — Story: Release anxiety in teams 21 Apr
 
 ---

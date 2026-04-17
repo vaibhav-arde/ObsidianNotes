@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Outreach/LinkedPost.md",
+                "file": "Playwright Notes/03 Playwright Advance Locators.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "LinkedPost"
+              "title": "03 Playwright Advance Locators"
             }
           },
           {
@@ -199,14 +199,14 @@
   },
   "active": "7e0ab9dc9353c323",
   "lastOpenFiles": [
-    "Outreach/Prompt_Guidelines.md",
+    "Playwright Notes/02 Sample Web App and Tasks.md",
+    "Playwright Notes/01 Playwright Basics.md",
+    "Playwright Notes/03 Playwright Advance Locators.md",
     "Outreach/LinkedPost.md",
+    "Outreach/Prompt_Guidelines.md",
     "Outreach/OUTBOUND_SCRIPT_FLOW.md",
     "Outreach/DAILY_OUTREACH_SYSTEM.md",
-    "Playwright Notes/01 Playwright Basics.md",
     "Outreach",
-    "Playwright Notes/03 Playwright Advance Locators.md",
-    "Playwright Notes/02 Sample Web App and Tasks.md",
     "Playwright Notes/06 API Automation Using Playwright.md",
     "Playwright Notes/05 API Automation Basics.md",
     "Playwright Notes/04 Alerts, Dialogs, Popups and Iframes.md",

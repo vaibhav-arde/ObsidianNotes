@@ -8,34 +8,61 @@
         "type": "tabs",
         "children": [
           {
-            "id": "7e0ab9dc9353c323",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Playwright Notes/03 Playwright Advance Locators.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "03 Playwright Advance Locators"
-            }
-          },
-          {
             "id": "8cc7cc52afbf0997",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Outreach/Prompt_Guidelines.md",
+                "file": "Outreach/Post Salesforce Automation framework.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Prompt_Guidelines"
+              "title": "Post Salesforce Automation framework"
+            }
+          },
+          {
+            "id": "e116ed91146fa0cb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Outreach/OUTBOUND_SCRIPT_FLOW.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "OUTBOUND_SCRIPT_FLOW"
+            }
+          },
+          {
+            "id": "fda950c73f0a2baf",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "LLM Evaluation/LLM Evaluation.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "LLM Evaluation"
+            }
+          },
+          {
+            "id": "4b896e45984f7ad4",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "LLM Evaluation/LLM Evaluation Images/Pasted image 20260420202720.png"
+              },
+              "icon": "lucide-image",
+              "title": "Pasted image 20260420202720"
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -197,15 +224,31 @@
       "bases:Create new base": false
     }
   },
-  "active": "7e0ab9dc9353c323",
+  "active": "e815f839e6d99028",
   "lastOpenFiles": [
-    "Playwright Notes/02 Sample Web App and Tasks.md",
-    "Playwright Notes/01 Playwright Basics.md",
-    "Playwright Notes/03 Playwright Advance Locators.md",
+    "LLM Evaluation/LLM Evaluation.md",
+    "LLM Evaluation/LLM Evaluation Images/Pasted image 20260420234958.png",
+    "LLM Evaluation/deepEval setup.md",
+    "LLM Evaluation/LLM Evaluation Images/Pasted image 20260420221341.png",
+    "LLM Evaluation/LLM Evaluation Images/Pasted image 20260420202919.png",
+    "LLM Evaluation/LLM Evaluation Images/Pasted image 20260420202720.png",
+    "LLM Evaluation/LLM Evaluation Images/Pasted image 20260420192538.png",
+    "LLM Evaluation/LLM Evaluation Images/Pasted image 20260420202513.png",
+    "LLM Evaluation/LLM Evaluation Images/Pasted image 20260420202402.png",
+    "LLM Evaluation/LLM Evaluation Images/Pasted image 20260420202334.png",
+    "LLM Evaluation/LLM Evaluation Images/Pasted image 20260420202032.png",
+    "LLM Evaluation/LLM Evaluation Images/Pasted image 20260420201924.png",
+    "LLM Evaluation/LLM Evaluation Images",
+    "Outreach/OUTBOUND_SCRIPT_FLOW.md",
+    "LLM Evaluation",
+    "Outreach/DAILY_OUTREACH_SYSTEM.md",
     "Outreach/LinkedPost.md",
     "Outreach/Prompt_Guidelines.md",
-    "Outreach/OUTBOUND_SCRIPT_FLOW.md",
-    "Outreach/DAILY_OUTREACH_SYSTEM.md",
+    "Outreach/Post Salesforce Automation framework.md",
+    "Outreach/Untitled.canvas",
+    "Playwright Notes/03 Playwright Advance Locators.md",
+    "Playwright Notes/02 Sample Web App and Tasks.md",
+    "Playwright Notes/01 Playwright Basics.md",
     "Outreach",
     "Playwright Notes/06 API Automation Using Playwright.md",
     "Playwright Notes/05 API Automation Basics.md",
@@ -217,23 +260,11 @@
     "Playwright Notes/Python Playwright/Day32-Screenshots,+Videos,Traceviewer+&+flakytest (1).pdf",
     "Playwright Notes/Python Playwright/Day33-datadriventesting.pdf",
     "Playwright Notes/Python Playwright/Day34-reporting.pdf",
-    "Playwright Notes/Python Playwright/Day35-PageObjectModel.pdf",
     "Pytest.md",
     "AI Path Python.md",
-    "Playwright Notes/Python Playwright/Day18-Plawright+with+Pytest.pdf",
     "Playwright Notes/Python Playwright/01 Playwright Python Installation.md",
     "Playwright Notes/Python Playwright/Python Pytest reports.md",
     "AI Claude Code/Claude.md",
-    "AI Claude Code/ClaudImages/Screenshot 2026-03-09 at 8.25.08 PM.png",
-    "AI Claude Code/ClaudImages/Pasted image 20260309204755.png",
-    "AI Claude Code/ClaudImages/Pasted image 20260309210600.png",
-    "AI Claude Code/ClaudImages/Pasted image 20260309210151.png",
-    "AI Claude Code/ClaudImages/Pasted image 20260309205805.png",
-    "PythonImages/Screenshot 2026-03-08 at 7.46.20 PM.png",
-    "PythonImages/Screenshot 2026-03-08 at 7.46.54 PM.png",
-    "PythonImages/Screenshot 2026-03-08 at 8.29.04 PM.png",
-    "PythonImages/Screenshot 2026-03-08 at 8.28.38 PM.png",
-    "PythonImages/Screenshot 2026-03-08 at 8.27.47 PM.png",
     "Playwright Notes/PlaywrightImages/Welcome.md",
     "2026-02-20.md",
     "Untitled.canvas"

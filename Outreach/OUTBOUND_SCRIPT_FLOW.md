@@ -134,3 +134,35 @@ Curious if you're seeing similar challenges as your team scales?
 * [ ] Build 1 strong case study
 * [ ] Create 1 reusable Playwright framework demo
 * [ ] Document 3 common client problems + solutions
+---
+
+**Message 1 (Intro / Positioning)**  
+Hi [Name], hope you’re doing well.
+
+I’m currently running an AI-first Test Automation consulting firm where we help SaaS and product teams accelerate releases using Playwright (TypeScript/Python), scalable frameworks, and AI-assisted testing workflows.
+
+If there’s any initiative around improving automation maturity, reducing regression cycles, or setting up robust QA processes, I’d be glad to support.
+
+---
+Hi [Name], hope you’re doing well.
+
+I lead an AI-first Test Automation consulting practice focused on helping SaaS and product teams accelerate releases through Playwright (TypeScript/Python), scalable automation frameworks, and AI-driven testing workflows.
+
+I work closely with engineering teams to improve automation maturity, reduce regression cycles, and establish robust, production-ready QA processes.
+
+If this aligns with any current priorities or if you have any lead, I’d be glad to explore how I can support.
+
+---
+
+**Message 2 (Value Add – Framework)**  
+Also, sharing something you might find useful.
+
+I’ve built an open-source, AI-driven Playwright (TypeScript) framework designed for production use—focused on scalability, maintainability, and faster onboarding for teams.
+
+You can take a look here:  
+https://www.linkedin.com/posts/vaibhav-arde_salesforce-playwright-typescript-share-7451493908389396480-HiDw?utm_source=share&utm_medium=member_desktop&rcm=ACoAAANktJwBFPHk3qDiLJ0mmTz9Tgl4iRKPAb4
+
+Happy to walk you or your team through it if relevant.
+
+---
+

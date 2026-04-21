@@ -113,4 +113,41 @@ Body:
 
 ![[Pasted image 20260420234958.png]]
 
+![[Pasted image 20260420235205.png]]
 
+![[Pasted image 20260420235225.png]]
+
+![[Pasted image 20260420235303.png]]
+
+![[Pasted image 20260420235342.png]]
+
+![[Pasted image 20260420235501.png]]
+
+---
+
+## Testing/Evaluating LLMs with Non Traditional Approach
+
+![[Pasted image 20260420235730.png]]
+
+![[Pasted image 20260420235841.png]]
+
+![[Pasted image 20260420235943.png]]
+
+---
+
+## LLMs-As-Judge while Evaluating LLMs and LLMs Based Applications
+
+![[Pasted image 20260421000111.png]]
+
+![[Pasted image 20260421000224.png]]
+
+![[Pasted image 20260421000256.png]]
+
+![[Pasted image 20260421000331.png]]
+
+![[Pasted image 20260421000353.png]]
+ ![[Pasted image 20260421000606.png]]
+ 
+---
+
+## Writing First DeepEval Code for AnswerRelevance

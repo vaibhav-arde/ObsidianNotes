@@ -41,28 +41,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "LLM Evaluation/LLM Evaluation.md",
+                "file": "LLM Evaluation/deepEval setup.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "LLM Evaluation"
-            }
-          },
-          {
-            "id": "4b896e45984f7ad4",
-            "type": "leaf",
-            "state": {
-              "type": "image",
-              "state": {
-                "file": "LLM Evaluation/LLM Evaluation Images/Pasted image 20260420202720.png"
-              },
-              "icon": "lucide-image",
-              "title": "Pasted image 20260420202720"
+              "title": "deepEval setup"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -224,20 +212,20 @@
       "bases:Create new base": false
     }
   },
-  "active": "e815f839e6d99028",
+  "active": "fda950c73f0a2baf",
   "lastOpenFiles": [
     "LLM Evaluation/LLM Evaluation.md",
-    "LLM Evaluation/LLM Evaluation Images/Pasted image 20260420234958.png",
+    "PythonImages/Pasted image 20260420235205.png",
+    "PythonImages/Pasted image 20260421000606.png",
+    "PythonImages/Pasted image 20260421000353.png",
+    "PythonImages/Pasted image 20260421000331.png",
+    "PythonImages/Pasted image 20260421000256.png",
+    "PythonImages/Pasted image 20260421000224.png",
+    "PythonImages/Pasted image 20260421000111.png",
+    "PythonImages/Pasted image 20260420235943.png",
+    "PythonImages/Pasted image 20260420235841.png",
+    "PythonImages/Pasted image 20260420235730.png",
     "LLM Evaluation/deepEval setup.md",
-    "LLM Evaluation/LLM Evaluation Images/Pasted image 20260420221341.png",
-    "LLM Evaluation/LLM Evaluation Images/Pasted image 20260420202919.png",
-    "LLM Evaluation/LLM Evaluation Images/Pasted image 20260420202720.png",
-    "LLM Evaluation/LLM Evaluation Images/Pasted image 20260420192538.png",
-    "LLM Evaluation/LLM Evaluation Images/Pasted image 20260420202513.png",
-    "LLM Evaluation/LLM Evaluation Images/Pasted image 20260420202402.png",
-    "LLM Evaluation/LLM Evaluation Images/Pasted image 20260420202334.png",
-    "LLM Evaluation/LLM Evaluation Images/Pasted image 20260420202032.png",
-    "LLM Evaluation/LLM Evaluation Images/Pasted image 20260420201924.png",
     "LLM Evaluation/LLM Evaluation Images",
     "Outreach/OUTBOUND_SCRIPT_FLOW.md",
     "LLM Evaluation",

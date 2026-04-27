@@ -42,7 +42,7 @@ Structure:
 
 Output:
 - Clean LinkedIn-ready post
-- No hashtags OR max 3 relevant hashtags
+- No hashtags OR max 5 relevant hashtags
 - No AI-like phrases and - and **
 - Keep structure based paragraphs but do not add separator 
 - Keep minimum line spacing

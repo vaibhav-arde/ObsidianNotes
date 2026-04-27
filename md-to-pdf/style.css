@@ -1,0 +1,347 @@
+/* ============================================================
+   Sarathi AI Labs — Branded PDF Stylesheet
+   Brand: #07B0D8 Cyan · Futuristic · Minimal · Engineering
+   Used with: pandoc + weasyprint
+   ============================================================ */
+
+/* ---------- Google Font Import ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+
+/* ---------- Brand Tokens ---------- */
+/*
+  --brand-primary:   #07B0D8    (cyan)
+  --brand-dark:      #048BA8    (dark cyan)
+  --brand-deeper:    #036B82    (deeper cyan for text)
+  --brand-light:     #E0F7FA    (light cyan background)
+  --brand-glow:      #0CD5FF    (glow/accent)
+  --brand-surface:   #F4FCFE    (subtle surface tint)
+  --text-primary:    #0A2E36    (dark cyan-black for body)
+  --text-secondary:  #1A5565    (dark cyan for sub-text)
+  --text-white:      #FFFFFF    (white for inverted areas)
+  --code-bg:         #0B1929    (dark navy for code blocks)
+*/
+
+/* ---------- Page Setup ---------- */
+@page {
+  size: A4;
+  margin: 80px 50px 70px 50px;
+
+  /* Watermark logo on every page */
+  background-image: url('logo-watermark.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 350px auto;
+
+  @top-left {
+    content: "SARATHI AI LABS";
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    color: #07B0D8;
+    letter-spacing: 1.5px;
+    padding-top: 10px;
+  }
+
+  @top-right {
+    content: "CONFIDENTIAL";
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 8px;
+    font-weight: 500;
+    color: #90CAD8;
+    letter-spacing: 1.5px;
+    padding-top: 10px;
+  }
+
+  @bottom-center {
+    content: "Page " counter(page) " of " counter(pages);
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 9px;
+    color: #048BA8;
+    padding-bottom: 10px;
+  }
+
+  @bottom-left {
+    content: "www.sarathiailabs.com";
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 8px;
+    color: #90CAD8;
+    padding-bottom: 10px;
+  }
+
+  @bottom-right {
+    content: "© Sarathi AI Labs";
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 8px;
+    color: #90CAD8;
+    padding-bottom: 10px;
+  }
+}
+
+/* First page — no header/footer for cover page */
+@page :first {
+  @top-left { content: none; }
+  @top-right { content: none; }
+  @bottom-left { content: none; }
+  @bottom-center { content: none; }
+  @bottom-right { content: none; }
+}
+
+/* ---------- Base ---------- */
+body {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-size: 11pt;
+  line-height: 1.7;
+  color: #0A2E36;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Cover / Logo ---------- */
+.cover-page {
+  text-align: center;
+  page-break-after: always;
+  padding-top: 80px;
+}
+
+.cover-page img.logo {
+  width: 200px;
+  margin-bottom: 30px;
+}
+
+.cover-page h1 {
+  font-size: 30pt;
+  font-weight: 800;
+  color: #07B0D8;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.cover-page .subtitle {
+  font-size: 14pt;
+  font-weight: 400;
+  color: #1A5565;
+  margin-bottom: 50px;
+}
+
+.cover-page .divider {
+  width: 80px;
+  height: 3px;
+  background: #07B0D8;
+  margin: 20px auto;
+}
+
+.cover-page .meta {
+  font-size: 10pt;
+  color: #6BA8B8;
+  margin-top: 30px;
+  line-height: 1.8;
+}
+
+/* Standalone logo at top of doc (non-cover) */
+img[alt="Logo"] {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+/* ---------- Headings ---------- */
+h1 {
+  font-size: 22pt;
+  font-weight: 800;
+  color: #07B0D8;
+  border-bottom: 3px solid #07B0D8;
+  padding-bottom: 8px;
+  margin-top: 40px;
+  margin-bottom: 16px;
+  letter-spacing: -0.3px;
+}
+
+h2 {
+  font-size: 16pt;
+  font-weight: 700;
+  color: #036B82;
+  border-bottom: 1.5px solid #C8EDF5;
+  padding-bottom: 6px;
+  margin-top: 30px;
+  margin-bottom: 12px;
+}
+
+h3 {
+  font-size: 13pt;
+  font-weight: 600;
+  color: #048BA8;
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+h4, h5, h6 {
+  font-size: 11pt;
+  font-weight: 600;
+  color: #1A5565;
+  margin-top: 18px;
+  margin-bottom: 6px;
+}
+
+/* ---------- Paragraphs & Links ---------- */
+p {
+  margin-bottom: 10px;
+}
+
+a {
+  color: #07B0D8;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(7, 176, 216, 0.3);
+}
+
+a:hover {
+  border-bottom-color: #07B0D8;
+}
+
+/* ---------- Lists ---------- */
+ul, ol {
+  margin-left: 20px;
+  margin-bottom: 12px;
+}
+
+li {
+  margin-bottom: 4px;
+}
+
+li::marker {
+  color: #07B0D8;
+}
+
+/* ---------- Code ---------- */
+code {
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 9.5pt;
+  background: #E0F7FA;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #B2EBF2;
+  color: #036B82;
+}
+
+pre {
+  background: #0B1929;
+  color: #C8E6F0;
+  padding: 16px 20px;
+  border-radius: 8px;
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 9pt;
+  line-height: 1.5;
+  overflow-x: auto;
+  margin-bottom: 16px;
+  border-left: 4px solid #07B0D8;
+}
+
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #C8E6F0;
+  font-size: 9pt;
+}
+
+/* ---------- Blockquote ---------- */
+blockquote {
+  border-left: 4px solid #07B0D8;
+  background: #E0F7FA;
+  padding: 12px 20px;
+  margin: 16px 0;
+  font-style: italic;
+  color: #1A5565;
+  border-radius: 0 6px 6px 0;
+}
+
+/* ---------- Tables ---------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+  font-size: 10pt;
+}
+
+thead {
+  background: #07B0D8;
+  color: #FFFFFF;
+}
+
+th {
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+td {
+  padding: 8px 14px;
+  border-bottom: 1px solid #C8EDF5;
+}
+
+tr:nth-child(even) {
+  background: #F4FCFE;
+}
+
+/* ---------- Horizontal Rule ---------- */
+hr {
+  border: none;
+  border-top: 2px solid #B2EBF2;
+  margin: 30px 0;
+}
+
+/* ---------- Images ---------- */
+img {
+  max-width: 100%;
+  border-radius: 6px;
+  margin: 10px 0;
+}
+
+/* ---------- Strong / Bold ---------- */
+strong {
+  font-weight: 700;
+  color: #036B82;
+}
+
+/* ---------- Emphasis ---------- */
+em {
+  font-style: italic;
+  color: #1A5565;
+}
+
+/* ---------- Page Break Utility ---------- */
+.page-break {
+  page-break-after: always;
+}
+
+/* ---------- Note / Tip / Warning boxes ---------- */
+.note, .tip, .warning {
+  padding: 14px 18px;
+  border-radius: 6px;
+  margin: 16px 0;
+  font-size: 10pt;
+}
+
+.note {
+  background: #E0F7FA;
+  border-left: 4px solid #07B0D8;
+  color: #036B82;
+}
+
+.tip {
+  background: #E0F7FA;
+  border-left: 4px solid #0CD5FF;
+  color: #036B82;
+}
+
+.warning {
+  background: #FFF8E1;
+  border-left: 4px solid #FFB300;
+  color: #5D4E37;
+}
+
+/* ---------- Utility: Glow Accent Divider ---------- */
+.glow-divider {
+  height: 2px;
+  background: #07B0D8;
+  margin: 30px 0;
+  border: none;
+}

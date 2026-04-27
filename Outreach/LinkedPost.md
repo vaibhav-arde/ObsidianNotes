@@ -308,7 +308,7 @@ Curious — which of these have you run into in your team?
 Follow me @VaibhaV Arde for practical insights on Agentic AI QA and building scalable test automation systems.
 ```
 
-* [ ] Day 6 — Why hiring more testers doesn’t fix quality 20 Apr
+* [X] Day 6 — Why hiring more testers doesn’t fix quality 20 Apr
 
 ```
 Hiring more testers doesn’t really fix quality.
@@ -371,9 +371,140 @@ Follow me @VaibhaV Arde for practical insights on Agentic AI QA and building sca
 
 # ⚙️ WEEK 2 — Authority
 
-* [ ] Day 8 — How I design Playwright frameworks
-* [ ] Day 9 — Real-world test pyramid for SaaS
+* [X] Day 8 — How I design Playwright frameworks
+
+```
+How I design Playwright frameworks.
+
+Honestly, most Playwright frameworks I see all look the same after a while. A stack of page objects, helpers thrown into random folders, and tests that start failing the second someone changes an environment variable.
+
+That’s not really a framework. It’s just chaos with folder structure.
+
+After building automation setups for enterprise platforms like Salesforce, I’ve landed on a few patterns that actually hold up when real teams use them.
+
+Here’s how I usually build mine.
+
+I start with fixtures, not giant base classes. In Playwright, fixtures are the architecture in my opinion. I normally use a layered fixture setup:
+
+- auth fixture handles OAuth2 once per worker
+  
+- API fixture gives typed CRUD clients
+  
+- page fixture gives a ready, logged-in browser context
+  
+
+Each test gets only what it needs. No repeated setup. No weird shared state causing random failures three weeks later.
+
+I also keep API and UI separate, but easy to combine.
+
+I build typed API clients with a BaseApiClient that handles auth headers, retries, logging, errors, all the boring stuff once. Then extend it into smaller focused clients like AccountApiClient, ContactApiClient, etc.
+
+That lets tests do something practical:
+
+- create data via API
+  
+- validate in UI
+  
+- cleanup via API
+  
+
+Much faster than doing everything through UI. Also way less flaky.
+
+Locators get their own place too.
+
+For Salesforce Lightning apps, I keep a central locator module with reusable patterns for dropdowns, lookups, formatted text, common widgets.
+
+So when the DOM changes (and it will), I fix one file instead of touching twenty files on a Friday evening.
+
+Environment config has to be layered.
+
+Base `.env` for defaults. Then `dev.env`, `qa.env`, whatever sits on top. I use typed config validation at startup so bad config fails immediately.
+
+This saves a lot of “works on my machine” conversations.
+
+And tagging matters more than people think.
+
+Use tags like:
+
+`@smoke` `@api` `@e2e` `@regression`
+
+Then let CI run only what matters. No reason to trigger 200 UI tests because one API endpoint changed.
+
+Biggest rule though:
+
+A good framework makes the next test boring to add.
+
+If someone needs to understand 15 files before writing one test, the framework already lost.
+
+Curious what pattern made _your_ automation framework easier to maintain?
+
+Follow VaibhaV Arde for more on Agentic AI QA solutions, Playwright, and scalable automation systems.
+
+GitHub Repo: [https://github.com/vaibhav-arde/saleforcePlaywrightAutomation/actions](https://github.com/vaibhav-arde/saleforcePlaywrightAutomation/actions)
+
+#Playwright #TestAutomation #QAEngineeringI will be glad to meet 
+```
+
+* [X] Day 9 — Real-world test pyramid for SaaS
+
+```
+Most SaaS teams are using the wrong test pyramid.
+
+They still stack thousands of UI tests at the top, call it coverage, then wonder why releases slow down and pipelines fail every morning.
+
+In real SaaS products, the classic pyramid needs an upgrade. Your biggest risk is rarely a button click. It is broken APIs, auth flows, billing logic, feature flags, integrations, and data consistency across services.
+
+What works better in production is this: heavy API coverage at the base, focused unit tests for business logic, a lean layer of end-to-end UI flows, and production monitoring above all of it.
+
+For one subscription platform, we cut flaky regression time from 3 hours to 28 minutes by deleting 60% of duplicate UI tests and replacing them with API contract + service-level checks. Same confidence, faster releases.
+
+Practical rule: test user journeys in UI, test rules in APIs, test edge cases in unit layers. If a bug can be caught without opening a browser, it should be.
+
+What does your current pyramid look like: strategy or historical accident? Follow me @VaibhaV Arde for Agentic AI QA solutions. #Playwright #QA #SaaS
+```
+
 * [ ] Day 10 — Reduce regression time by 70%
+```
+Most teams don’t need more testers to cut regression time.  
+They need fewer useless tests.
+
+A lot of companies keep adding people when releases get slow.  
+Honestly, that usually just creates more meetings and more confusion.
+
+One SaaS team I worked with had a 6-hour regression cycle before every release.  
+Everyone complained about speed. Nobody questioned the suite itself.
+
+Too many low-value UI checks.  
+Same things tested in three different places.  
+Random failures every week, so red builds were mostly ignored.
+
+We cut it by around 70%.
+
+Not with some magic framework.
+
+We cleaned up what deserved to exist.
+
+Critical user journeys stayed in Playwright.  
+Business rules moved to API tests.  
+A bunch of edge-case UI tests got deleted entirely.
+
+Then we stopped running everything for every release.  
+If billing changed, run billing flows.  
+If login changed, run auth flows.  
+Pretty obvious, but many teams still run the whole planet each deploy.
+
+We also fixed flaky waits, messy test data, shared environments.  
+Those small things waste more time than people admit.
+
+My view: every automated test should earn its place.
+
+If regression still takes hours, you probably don’t have a speed problem.  
+You have a decision problem.
+
+How long does your suite take today, and do people actually trust it?
+
+Follow me @VaibhaV Arde for Agentic AI QA solutions.
+```
 * [ ] Day 11 — CI/CD + automation failure points
 * [ ] Day 12 — API vs UI testing strategy
 * [ ] Day 13 — Real AI use cases in testing (no hype)

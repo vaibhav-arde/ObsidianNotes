@@ -1,6 +1,6 @@
 ---
 share_link: https://share.note.sx/z9q0er25#xzyzzlqJaWDzkYJwx6RUW5nwBq2EYESHJJzg8+1gXZg
-share_updated: 2026-04-28T18:50:17+05:30
+share_updated: 2026-04-29T18:46:53+05:30
 ---
 Use ! to run bash commands
 

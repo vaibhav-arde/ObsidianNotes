@@ -505,7 +505,53 @@ How long does your suite take today, and do people actually trust it?
 
 Follow me @VaibhaV Arde for Agentic AI QA solutions.
 ```
-* [ ] Day 11 — CI/CD + automation failure points
+* [ ] Day 11 — CI/CD + automation failure points 27 Apr
+```
+Most CI/CD pipelines don’t fail because of Jenkins, GitHub Actions, or GitLab.
+
+They fail because the test automation layer was never built for continuous delivery.
+
+I’ve seen teams proudly say, “We have 2,000 automated tests.”
+
+Then every release waits 90 minutes, 18 tests fail randomly, and one engineer spends the morning rerunning pipelines.
+
+That’s not automation.
+
+That’s a queue with extra steps.
+
+The common failure points are predictable:  
+UI tests doing API validation.  
+Shared test data getting corrupted.  
+Tests dependent on execution order.  
+Slow suites with zero prioritization.  
+No ownership when failures happen.
+
+My blunt view:  
+If your pipeline needs human babysitting, it is not CI/CD yet.
+
+Good teams treat automation like production code.
+
+Fast smoke suite on every commit.  
+Deeper regression in parallel.  
+Stable seed data.  
+Clear failure reporting.  
+Flaky tests quarantined immediately, not “next sprint.”
+
+One startup I worked with cut release validation from 75 minutes to 14 minutes.
+
+We didn’t add tools.
+
+We removed bad tests, fixed data setup, and stopped pretending every test belongs in the main pipeline.
+
+Speed usually comes from subtraction, not addition.
+
+Ask yourself:  
+Is your pipeline validating quality, or just delaying deployment?
+
+Follow @VaibhaV Arde for Agentic AI QA solutions and practical release engineering insights.
+
+#CI_CD #TestAutomation #Playwright #DevOps #QA
+```
 * [ ] Day 12 — API vs UI testing strategy
 * [ ] Day 13 — Real AI use cases in testing (no hype)
 * [ ] Day 14 — Tech stack: Python + Playwright + AI

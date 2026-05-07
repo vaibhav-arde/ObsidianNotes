@@ -463,7 +463,7 @@ Practical rule: test user journeys in UI, test rules in APIs, test edge cases in
 What does your current pyramid look like: strategy or historical accident? Follow me @VaibhaV Arde for Agentic AI QA solutions. #Playwright #QA #SaaS
 ```
 
-* [ ] Day 10 — Reduce regression time by 70%
+* [x] Day 10 — Reduce regression time by 70%
 ```
 Most teams don’t need more testers to cut regression time.  
 They need fewer useless tests.
@@ -505,7 +505,7 @@ How long does your suite take today, and do people actually trust it?
 
 Follow me @VaibhaV Arde for Agentic AI QA solutions.
 ```
-* [ ] Day 11 — CI/CD + automation failure points 27 Apr
+* [x] Day 11 — CI/CD + automation failure points 27 Apr
 ```
 Most CI/CD pipelines don’t fail because of Jenkins, GitHub Actions, or GitLab.
 
@@ -552,9 +552,200 @@ Follow @VaibhaV Arde for Agentic AI QA solutions and practical release engineeri
 
 #CI_CD #TestAutomation #Playwright #DevOps #QA
 ```
-* [ ] Day 12 — API vs UI testing strategy
-* [ ] Day 13 — Real AI use cases in testing (no hype)
-* [ ] Day 14 — Tech stack: Python + Playwright + AI
+* [x] Day 12 — API vs UI testing strategy : 2 May
+```
+Most teams are testing their product in the wrong place.
+
+They spend 70% effort on UI tests…  
+And then wonder why releases are slow and flaky.
+
+I’ve seen this pattern across SaaS teams again and again.
+
+Huge Playwright suites.  
+Hundreds of end-to-end tests.  
+CI pipelines crawling.
+
+And still… production bugs slip through.
+
+Here’s the uncomfortable truth:  
+UI tests are the most expensive way to find bugs.
+
+They’re slow, brittle, and tightly coupled to the frontend.
+
+Every small UI change breaks tests that had nothing to do with the bug.
+
+Now compare that with API testing.
+
+Fast execution.  
+Stable contracts.  
+Direct validation of business logic.
+
+In one fintech project, we cut UI tests by 60%  
+and moved coverage to APIs.
+
+Result?  
+Pipeline time dropped from 45 mins to 12 mins.  
+Flaky failures almost disappeared.
+
+The insight is simple:  
+UI tests should validate journeys, not logic.
+
+If your UI suite is catching validation rules, edge cases, and data scenarios…  
+you’re testing too late in the pipeline.
+
+What actually works in practice:
+
+Keep UI tests lean  
+Focus on critical user flows only
+
+Push business logic validation to API layer  
+That’s where most bugs actually originate
+
+Add contract testing between services  
+Prevent integration surprises early
+
+Use UI tests as confidence layer, not primary safety net
+
+If your CI is slow or flaky today,  
+don’t optimize tests… change the testing pyramid.
+
+Curious how your team is balancing API vs UI right now?
+
+Follow me @VaibhaV Arde for more on building Agentic AI QA systems that actually scale.
+
+#TestAutomation #Playwright #SaaS #QualityEngineering #APITesting
+```
+* [ ] Day 13 — Real AI use cases in testing (no hype) : 03 May
+```
+Most “AI in testing” demos look impressive.  
+Very few survive real CI pipelines.
+
+I’ve worked with teams that plugged AI into everything.  
+Test generation, self-healing, bug prediction.
+
+Looked great in demos.  
+Broke down in week two.
+
+Why?
+
+Because most of it ignores how engineering teams actually ship.
+
+Flaky environments.  
+Changing APIs.  
+Half-written requirements.  
+Messy data.
+
+Here’s what I’ve seen actually work in production.
+
+AI for test case expansion, not blind generation.  
+Give it real API specs or logs, let it suggest edge cases you missed.
+
+AI for failure analysis.  
+Instead of staring at Playwright traces, we cluster failures and identify root causes faster.
+
+AI for test maintenance.  
+Not “self-healing selectors” magic.  
+But controlled updates based on DOM diff + approval flow.
+
+One SaaS team I worked with reduced triage time by 40%.  
+Not by adding more tests… but by understanding failures faster.
+
+That’s the pattern.
+
+AI should reduce thinking fatigue, not replace engineering judgment.
+
+If your AI tool is writing 500 test cases you don’t trust,  
+it’s adding noise, not value.
+
+What teams should actually do:
+
+Start with one bottleneck  
+Usually flaky tests or slow triage
+
+Inject AI there  
+Logs, traces, API responses are gold mines
+
+Keep humans in control  
+Approval workflows > blind automation
+
+Measure impact  
+Time saved in CI, not number of tests generated
+
+Curious where AI is actually helping in your QA workflow right now?
+
+Follow me @VaibhaV Arde for practical insights on building Agentic AI QA systems that teams actually use.
+
+#AIinTesting #TestAutomation #Playwright #SaaS #QualityEngineering
+```
+* [ ] Day 14 — Tech stack: Python + Playwright + AI : 04 May
+```
+Most teams don’t have a testing problem.  
+They have a stack problem.
+
+I keep seeing this in SaaS teams.  
+Too many tools stitched together.  
+JS for UI, Java for APIs, random scripts for data.
+
+Result?  
+Slow onboarding, duplicated logic, fragile pipelines.
+
+Then they try to “add AI” on top of that mess.
+
+That’s where things fall apart.
+
+Here’s what’s actually working for us and our clients:
+
+Python + Playwright + AI is a very practical combo.  
+Not trendy. Just efficient.
+
+Playwright handles UI and API layers cleanly.  
+One framework, one mental model.
+
+Python becomes the glue.  
+Test orchestration, data setup, API clients, AI integration.
+
+No context switching between ecosystems.
+
+In one SaaS project, we moved from mixed stack to this setup.  
+Reduced framework code by ~35%.  
+More importantly, onboarding new engineers became much faster.
+
+The real advantage shows up when you add AI.
+
+Parsing logs, generating edge cases, analyzing failures  
+All easier when your data layer and test logic sit in Python.
+
+You’re not fighting your stack while trying to innovate.
+
+The lesson most teams miss:
+
+AI doesn’t fix bad architecture.  
+It amplifies whatever you already have.
+
+If your stack is fragmented,  
+AI will just make it harder to manage.
+
+What I recommend:
+
+Unify your testing layers  
+UI and API should not live in silos
+
+Use Playwright beyond UI  
+Leverage its API capabilities fully
+
+Keep Python at the core  
+Data, orchestration, and AI workflows in one place
+
+Add AI where it reduces effort  
+Not where it creates more abstraction
+
+If you’re rethinking your automation stack right now,  
+what’s the biggest friction point you’re facing?
+
+Follow me @VaibhaV Arde for real-world insights on building Agentic AI QA systems that scale.
+
+#TestAutomation #Playwright #Python #AI #SaaS
+```
 
 ---
 

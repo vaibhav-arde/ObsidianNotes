@@ -1,3 +1,7 @@
+---
+share_link: https://share.note.sx/t9ej4ho3#hHcSFNfT/cpIEhxtkMCUqB0UarXJmSpelH5khC+2L3A
+share_updated: 2026-05-04T15:18:50+05:30
+---
 
 ![[Pasted image 20260420192315.png]]
 ![[Pasted image 20260420192538.png]]
@@ -151,3 +155,56 @@ Body:
 ---
 
 ## Writing First DeepEval Code for AnswerRelevance
+
+
+---
+----
+
+# Datasets
+
+![[Pasted image 20260430121407.png]]
+
+![[Pasted image 20260430122414.png]]
+
+![[Pasted image 20260430123234.png]]
+
+---
+---
+RAG:
+![[Pasted image 20260501162738.png]]
+
+![[Pasted image 20260501163011.png]]
+
+---
+---
+
+# RAGAS:
+
+---
+---
+# Hugging Face Evaluate
+
+![[Pasted image 20260505110637.png]]
+![[Pasted image 20260505110908.png]]
+
+
+---
+---
+# Component Level Evaluation
+
+![[Pasted image 20260505121947.png]]
+
+![[Pasted image 20260505122050.png]]
+
+![[Pasted image 20260505122136.png]]
+
+![[Pasted image 20260505122151.png]]
+
+![[Pasted image 20260505122429.png]]
+
+![[Pasted image 20260505122542.png]]
+
+![[Pasted image 20260505122657.png]]
+
+![[Pasted image 20260505123129.png]]
+

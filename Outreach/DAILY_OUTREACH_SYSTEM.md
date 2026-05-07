@@ -21,3 +21,20 @@
 * [ ] Calls booked: ___
 
 ---
+
+# Connection Request
+
+Hi , noticed you're scaling engineering team. 
+I work with SaaS teams on speeding up releases by eliminating manual QA bottlenecks, would be great to connect.
+
+Hi, are your tests reliable enough to give confidence in every release?  
+I help SaaS teams speed up releases by removing QA bottlenecks, would love to connect.
+
+---
+Hi , are you scaling engineering team?
+I work with SaaS teams on speeding up releases by eliminating manual QA bottlenecks, would be great to connect.
+
+
+---
+
+

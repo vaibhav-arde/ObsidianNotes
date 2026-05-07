@@ -275,8 +275,3 @@ If you want to turn this into **revenue-ready service**, next steps:
         
 
 ---
-
-If you want, I can next help you:
-
-👉 Turn this into a **client demo project (portfolio-ready in 1 day)**  
-👉 Or design a **paid offering structure (₹50k–₹3L per client range)**

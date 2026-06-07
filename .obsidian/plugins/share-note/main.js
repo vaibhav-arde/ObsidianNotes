@@ -34,23 +34,6 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 ));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// manifest.json
-var require_manifest = __commonJS({
-  "manifest.json"(exports, module2) {
-    module2.exports = {
-      id: "share-note",
-      name: "Share Note",
-      version: "1.3.1",
-      minAppVersion: "0.15.0",
-      description: "Instantly share a note, with the full theme and content exactly like you see in Reading View. Data is shared encrypted by default, and only you and the person you send it to have the key.",
-      author: "Alan Grainger",
-      authorUrl: "https://github.com/alangrainger",
-      fundingUrl: "https://ko-fi.com/alan_",
-      isDesktopOnly: false
-    };
-  }
-});
-
 // node_modules/data-uri-to-buffer/dist/index.js
 var require_dist = __commonJS({
   "node_modules/data-uri-to-buffer/dist/index.js"(exports) {
@@ -1059,9 +1042,9 @@ var ShareSettingsTab = class extends import_obsidian.PluginSettingTab {
       this.plugin.settings.yamlField = value || DEFAULT_SETTINGS.yamlField;
       await this.plugin.saveSettings();
     }));
-    new import_obsidian.Setting(containerEl).setName("Upload options").setHeading();
+    new import_obsidian.Setting(containerEl).setName("Sharing").setHeading();
     new import_obsidian.Setting(containerEl).setName(`\u2B50 Your shared note theme is "${this.plugin.settings.theme || "Obsidian default theme"}"`).setDesc("To set a new theme, change the theme in Obsidian to your desired theme and then use the `Force re-upload all data` command. You can change your Obsidian theme after that without affecting the theme for your shared notes.").then((setting) => addDocs(setting, "https://docs.note.sx/notes/theme"));
-    new import_obsidian.Setting(containerEl).setName("Light/Dark mode").setDesc("Choose the mode with which your files will be shared").addDropdown((dropdown) => {
+    new import_obsidian.Setting(containerEl).setName("Light/dark mode").setDesc("Choose the mode with which your files will be shared").addDropdown((dropdown) => {
       dropdown.addOption("Same as theme", "Same as theme").addOption("Dark", "Dark").addOption("Light", "Light").setValue(ThemeMode[this.plugin.settings.themeMode]).onChange(async (value) => {
         this.plugin.settings.themeMode = ThemeMode[value];
         await this.plugin.saveSettings();
@@ -1073,7 +1056,7 @@ var ShareSettingsTab = class extends import_obsidian.PluginSettingTab {
         await this.plugin.saveSettings();
       });
     });
-    new import_obsidian.Setting(containerEl).setName("Note options").setHeading();
+    new import_obsidian.Setting(containerEl).setName("Note display").setHeading();
     const defaultTitleDesc = "Select the location to source the published note title. It will default to the note title if nothing is found for the selected option.";
     const titleSetting = new import_obsidian.Setting(containerEl).setName("Note title source").setDesc(defaultTitleDesc).addDropdown((dropdown) => {
       for (const enumKey in TitleSource) {
@@ -1108,7 +1091,7 @@ var ShareSettingsTab = class extends import_obsidian.PluginSettingTab {
       });
     });
     new import_obsidian.Setting(containerEl).setName("Remove custom elements").setDesc("Remove elements before sharing by targeting them with CSS selectors. One selector per line.").addTextArea((text) => {
-      text.setPlaceholder("div.class-to-remove").setValue(this.plugin.settings.removeElements).onChange(async (value) => {
+      text.setPlaceholder(".class-to-remove").setValue(this.plugin.settings.removeElements).onChange(async (value) => {
         this.plugin.settings.removeElements = value;
         await this.plugin.saveSettings();
       });
@@ -1245,7 +1228,7 @@ function indexToIv(int) {
 
 // src/StatusMessage.ts
 var import_obsidian2 = require("obsidian");
-var pluginName = require_manifest().name;
+var pluginName = "Share Note";
 var statuses = {
   [2 /* Error */]: {
     class: "share-note-status-error",
@@ -1265,19 +1248,24 @@ var StatusMessage = class extends import_obsidian2.Notice {
     var _a;
     const messageDoc = new DocumentFragment();
     const icon = ((_a = statuses[type]) == null ? void 0 : _a.icon) || "";
-    const messageEl = messageDoc.createEl("div");
-    messageEl.innerHTML = `${icon}${pluginName}: ${text}`;
+    const messageEl = messageDoc.createDiv({ text: `${icon}${pluginName}: ${text}` });
     super(messageDoc, duration);
-    if (messageEl.parentElement) {
-      if (statuses[type]) {
-        messageEl.parentElement.classList.add(statuses[type].class);
-      }
+    if (statuses[type]) {
+      this.containerEl.classList.add(statuses[type].class);
     }
     this.icon = icon;
     this.messageEl = messageEl;
   }
   setStatus(message) {
-    this.messageEl.innerText = `${this.icon}${pluginName}: ${message}`;
+    this.messageEl.setText(`${this.icon}${pluginName}: ${message}`);
+  }
+  /**
+   * Append a clickable link to the message on its own line.
+   */
+  addLink(url, text) {
+    this.messageEl.createEl("br");
+    this.messageEl.createEl("br");
+    this.messageEl.createEl("a", { text, href: url });
   }
 };
 
@@ -1295,16 +1283,10 @@ function getElementStyle(key, element) {
       style.removeProperty("margin-bottom");
     }
     elementStyle.style = style.cssText;
-  } catch (e2) {
-    console.log(e2);
+  } catch (_e) {
   }
   return elementStyle;
 }
-var NoteTemplate = class {
-  constructor() {
-    this.elements = [];
-  }
-};
 
 // src/note.ts
 var import_data_uri_to_buffer = __toESM(require_dist());
@@ -3161,9 +3143,7 @@ async function compressImage(data, filetype) {
       const originalData = data;
       data = await compressArrayBuffer(data, type, defaultOptions);
       if (data.byteLength > 200 * 1024) {
-        const test = await compressArrayBuffer(data, type, Object.assign(defaultOptions, {
-          fileType: "image/jpeg"
-        }));
+        const test = await compressArrayBuffer(data, type, { ...defaultOptions, fileType: "image/jpeg" });
         if (test.byteLength < data.byteLength) {
           data = test;
           filetype = "jpg";
@@ -3173,8 +3153,7 @@ async function compressImage(data, filetype) {
         data = originalData;
       }
       changed = data.byteLength !== originalData.byteLength;
-    } catch (e2) {
-      console.log(e2);
+    } catch (_e) {
     }
   }
   return {
@@ -3185,7 +3164,13 @@ async function compressImage(data, filetype) {
 }
 
 // src/api.ts
-var pluginVersion = require_manifest().version;
+var HandledError = class extends Error {
+  constructor(message = "Handled error") {
+    super(message);
+    this.handled = true;
+    this.name = "HandledError";
+  }
+};
 var API = class {
   constructor(plugin) {
     this.plugin = plugin;
@@ -3197,7 +3182,7 @@ var API = class {
       "x-sharenote-id": this.plugin.settings.uid,
       "x-sharenote-key": await sha256(nonce + this.plugin.settings.apiKey),
       "x-sharenote-nonce": nonce,
-      "x-sharenote-version": pluginVersion
+      "x-sharenote-version": this.plugin.manifest.version
     };
   }
   async post(endpoint, data, retries = 1) {
@@ -3207,38 +3192,32 @@ var API = class {
       "Content-Type": "application/json"
     };
     if (data == null ? void 0 : data.byteLength) headers["x-sharenote-bytelength"] = data.byteLength.toString();
-    const body = Object.assign({}, data);
+    const body = { ...data };
     if (this.plugin.settings.debug) body.debug = this.plugin.settings.debug;
     while (retries > 0) {
-      try {
-        const res = await (0, import_obsidian3.requestUrl)({
-          url: this.plugin.settings.server + endpoint,
-          method: "POST",
-          headers,
-          body: JSON.stringify(body)
-        });
-        if (this.plugin.settings.debug === 1 && (data == null ? void 0 : data.filetype) === "html") {
-          console.log(res.json.html);
-        }
-        return res.json;
-      } catch (error) {
-        if (error.status < 500 || retries <= 1) {
-          const message = (_a = error.headers) == null ? void 0 : _a.message;
-          if (message) {
-            new StatusMessage(message, 2 /* Error */);
-            if (error.status === 462) {
-              this.plugin.authRedirect("share").then();
-            }
-            throw new Error("Known error");
+      const res = await (0, import_obsidian3.requestUrl)({
+        url: this.plugin.settings.server + endpoint,
+        method: "POST",
+        headers,
+        body: JSON.stringify(body),
+        throw: false
+      });
+      if (res.status === 200) return res.json;
+      if (res.status < 500 || retries <= 1) {
+        const message = (_a = res.headers) == null ? void 0 : _a.message;
+        if (message) {
+          new StatusMessage(message, 2 /* Error */);
+          if (res.status === 462) {
+            void this.plugin.authRedirect("share");
           }
-          throw new Error("Unknown error");
-        } else {
-          await new Promise((resolve) => setTimeout(resolve, 1e3));
+          throw new HandledError(message);
         }
+        throw new Error("Unknown error");
       }
-      console.log("Retrying " + retries);
+      await new Promise((resolve) => window.setTimeout(resolve, 1e3));
       retries--;
     }
+    throw new Error("Retries exhausted");
   }
   async postRaw(endpoint, data, retries = 4) {
     const headers = {
@@ -3248,30 +3227,29 @@ var API = class {
     };
     if (data.byteLength) headers["x-sharenote-bytelength"] = data.byteLength.toString();
     while (retries > 0) {
-      const res = await fetch(this.plugin.settings.server + endpoint, {
+      const res = await (0, import_obsidian3.requestUrl)({
+        url: this.plugin.settings.server + endpoint,
         method: "POST",
         headers,
-        body: data.content
+        body: data.content,
+        throw: false
       });
-      if (res.status !== 200) {
-        if (res.status < 500 || retries <= 1) {
-          const message = await res.text();
-          if (message) {
-            new StatusMessage(message, 2 /* Error */);
-            throw new Error("Known error");
-          }
-          throw new Error("Unknown error");
+      if (res.status === 200) return res.json;
+      if (res.status < 500 || retries <= 1) {
+        const message = res.text;
+        if (message) {
+          new StatusMessage(message, 2 /* Error */);
+          throw new HandledError(message);
         }
-        await new Promise((resolve) => setTimeout(resolve, 1e3));
-      } else {
-        return res.json();
+        throw new Error("Unknown error");
       }
-      console.log("Retrying " + retries);
+      await new Promise((resolve) => window.setTimeout(resolve, 1e3));
       retries--;
     }
+    throw new Error("Retries exhausted");
   }
   async queueUpload(item) {
-    if (item.data.content) {
+    if (item.data.content && typeof item.data.content !== "string") {
       const compressed = await compressImage(item.data.content, item.data.filetype);
       if (compressed.changed) {
         item.data.content = compressed.data;
@@ -3282,35 +3260,33 @@ var API = class {
   }
   async processQueue(status, type = "attachment") {
     const res = await this.post("/v1/file/check-files", {
-      files: this.uploadQueue.map((x) => {
-        return {
-          hash: x.data.hash,
-          filetype: x.data.filetype,
-          byteLength: x.data.byteLength
-        };
-      })
+      files: this.uploadQueue.map((x) => ({
+        hash: x.data.hash,
+        filetype: x.data.filetype,
+        byteLength: x.data.byteLength
+      }))
     });
     let count = 1;
-    const promises = [];
+    const total = this.uploadQueue.length;
+    const uploads = [];
     for (const queueItem of this.uploadQueue) {
       const checkFile = res == null ? void 0 : res.files.find((item) => item.hash === queueItem.data.hash && item.filetype === queueItem.data.filetype);
       if (checkFile == null ? void 0 : checkFile.url) {
-        status.setStatus(`Uploading ${type} ${count++} of ${this.uploadQueue.length}...`);
+        status.setStatus(`Uploading ${type} ${count++} of ${total}...`);
         queueItem.callback(checkFile.url);
       } else {
-        promises.push(new Promise((resolve) => {
-          this.postRaw("/v1/file/upload", queueItem.data).then((res2) => {
-            status.setStatus(`Uploading ${type} ${count++} of ${this.uploadQueue.length}...`);
-            queueItem.callback(res2.url);
-            resolve();
-          }).catch((e2) => {
-            console.log(e2);
-            resolve();
-          });
-        }));
+        uploads.push((async () => {
+          try {
+            const uploaded = await this.postRaw("/v1/file/upload", queueItem.data);
+            status.setStatus(`Uploading ${type} ${count++} of ${total}...`);
+            queueItem.callback(uploaded.url);
+          } catch (e2) {
+            console.error(`[Share Note] ${type} upload failed:`, e2);
+          }
+        })());
       }
     }
-    await Promise.all(promises);
+    await Promise.all(uploads);
     this.uploadQueue = [];
     return res;
   }
@@ -3341,14 +3317,12 @@ var API = class {
 };
 function parseExistingShareUrl(url) {
   const match = url.match(/(\w+)(#.+?|)$/);
-  if (match) {
-    return {
-      filename: match[1],
-      decryptionKey: match[2].slice(1) || "",
-      url
-    };
-  }
-  return false;
+  if (!match) return null;
+  return {
+    filename: match[1],
+    decryptionKey: match[2].slice(1) || "",
+    url
+  };
 }
 
 // node_modules/csso/lib/syntax.js
@@ -14781,51 +14755,51 @@ var cssAttachmentWhitelist = {
 };
 var Note = class {
   constructor(plugin) {
+    this.meta = null;
     this.isEncrypted = true;
     this.isForceUpload = false;
     this.isForceClipboard = false;
+    this.elements = [];
+    this.template = {
+      width: "",
+      elements: [],
+      encrypted: true,
+      content: "",
+      mathJax: false
+    };
     var _a;
     this.plugin = plugin;
     this.leaf = (_a = this.plugin.app.workspace.getActiveFileView()) == null ? void 0 : _a.leaf;
-    this.elements = [];
-    this.template = new NoteTemplate();
-  }
-  /**
-   * Return the name (key) of a frontmatter property, eg 'share_link'
-   * @param key
-   * @return {string} The name (key) of a frontmatter property
-   */
-  field(key) {
-    return this.plugin.field(key);
   }
   async share() {
     var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m;
+    this.status = new StatusMessage("Please do not change to another note as the current note data is still being parsed.", 0 /* Default */, 60 * 1e3);
     if (!this.plugin.settings.apiKey) {
-      this.plugin.authRedirect("share").then();
+      this.status.hide();
+      void this.plugin.authRedirect("share");
       return;
     }
-    this.status = new StatusMessage("Please do not change to another note as the current note data is still being parsed.", 0 /* Default */, 60 * 1e3);
     const startMode = this.leaf.getViewState();
     const previewMode = this.leaf.getViewState();
     if (previewMode.state) {
       previewMode.state.mode = "preview";
     }
     await this.leaf.setViewState(previewMode);
-    await new Promise((resolve) => setTimeout(resolve, 600));
+    await new Promise((resolve) => window.setTimeout(resolve, 600));
     this.leaf.view.previewMode.applyScroll(0);
-    await new Promise((resolve) => setTimeout(resolve, 100));
+    await new Promise((resolve) => window.setTimeout(resolve, 100));
     try {
       const view = this.leaf.view;
       const renderer = view.modes.preview.renderer;
-      this.elements.push(getElementStyle("html", document.documentElement));
-      const bodyStyle = getElementStyle("body", document.body);
+      this.elements.push(getElementStyle("html", activeDocument.documentElement));
+      const bodyStyle = getElementStyle("body", activeDocument.body);
       bodyStyle.classes.push("share-note-plugin");
       this.elements.push(bodyStyle);
       this.elements.push(getElementStyle("preview", renderer.previewEl));
       this.elements.push(getElementStyle("pusher", renderer.pusherEl));
       this.contentDom = new DOMParser().parseFromString(await this.querySelectorAll(this.leaf.view), "text/html");
       this.cssRules = [];
-      Array.from(document.styleSheets).forEach((x) => Array.from(x.cssRules).forEach((rule) => {
+      Array.from(activeDocument.styleSheets).forEach((x) => Array.from(x.cssRules).forEach((rule) => {
         this.cssRules.push(rule);
       }));
       this.css = this.cssRules.filter((rule) => {
@@ -14833,13 +14807,13 @@ var Note = class {
         return ((_a2 = rule == null ? void 0 : rule.media) == null ? void 0 : _a2[0]) !== "print";
       }).map((rule) => rule.cssText).join("").replace(/\n/g, "");
     } catch (e2) {
-      console.log(e2);
+      console.error("[Share Note] Failed to parse current note:", e2);
       this.status.hide();
-      new StatusMessage("Failed to parse current note, check console for details", 2 /* Error */);
+      new StatusMessage("Failed to parse the current note", 2 /* Error */);
       return;
     }
-    setTimeout(() => {
-      this.leaf.setViewState(startMode);
+    window.setTimeout(() => {
+      void this.leaf.setViewState(startMode);
     }, 200);
     this.status.setStatus("Processing note...");
     const file = this.plugin.app.workspace.getActiveFile();
@@ -14855,14 +14829,14 @@ var Note = class {
       (_c = this.contentDom.querySelector("div.frontmatter-container")) == null ? void 0 : _c.remove();
     } else {
       this.contentDom.querySelectorAll("div.metadata-property").forEach((propertyContainerEl) => {
-        var _a2, _b2;
+        var _a2, _b2, _c2;
         const propertyName = propertyContainerEl.getAttribute("data-property-key");
         if (propertyName) {
           const labelEl = propertyContainerEl.querySelector("input.metadata-property-key-input");
           labelEl == null ? void 0 : labelEl.setAttribute("value", propertyName);
           const valueEl = propertyContainerEl.querySelector("div.metadata-property-value > input");
-          const value = ((_b2 = (_a2 = this.meta) == null ? void 0 : _a2.frontmatter) == null ? void 0 : _b2[propertyName]) || "";
-          valueEl == null ? void 0 : valueEl.setAttribute("value", value);
+          const value = (_c2 = (_b2 = (_a2 = this.meta) == null ? void 0 : _a2.frontmatter) == null ? void 0 : _b2[propertyName]) != null ? _c2 : "";
+          valueEl == null ? void 0 : valueEl.setAttribute("value", String(value));
           switch (valueEl == null ? void 0 : valueEl.getAttribute("type")) {
             case "checkbox":
               if (value) valueEl.setAttribute("checked", "checked");
@@ -14887,7 +14861,11 @@ var Note = class {
       const iconEl = el.querySelector("div.callout-icon");
       const svgEl = iconEl == null ? void 0 : iconEl.querySelector("svg");
       if (svgEl) {
-        svgEl.outerHTML = `<svg width="16" height="16" data-share-note-lucide="${icon}"></svg>`;
+        const newSvg = this.contentDom.createElementNS("http://www.w3.org/2000/svg", "svg");
+        newSvg.setAttribute("width", "16");
+        newSvg.setAttribute("height", "16");
+        newSvg.setAttribute("data-share-note-lucide", icon);
+        svgEl.replaceWith(newSvg);
       }
     }
     for (const el of this.contentDom.querySelectorAll("a.internal-link, a.footnote-link")) {
@@ -14911,8 +14889,7 @@ var Note = class {
           el.removeAttribute("target");
           el.removeAttribute("href");
           continue;
-        } catch (e2) {
-          console.error(e2);
+        } catch (_e2) {
         }
       } else if (match) {
         if (this.internalLinkToSharedNote(match[1], el)) {
@@ -14928,8 +14905,8 @@ var Note = class {
     this.cssResult = uploadResult.css;
     await this.processCss();
     let decryptionKey = "";
-    if ((_g = (_f = this.meta) == null ? void 0 : _f.frontmatter) == null ? void 0 : _g[this.field(0 /* link */)]) {
-      const match = parseExistingShareUrl((_i = (_h = this.meta) == null ? void 0 : _h.frontmatter) == null ? void 0 : _i[this.field(0 /* link */)]);
+    if ((_g = (_f = this.meta) == null ? void 0 : _f.frontmatter) == null ? void 0 : _g[this.plugin.field(0 /* link */)]) {
+      const match = parseExistingShareUrl((_i = (_h = this.meta) == null ? void 0 : _h.frontmatter) == null ? void 0 : _i[this.plugin.field(0 /* link */)]);
       if (match) {
         this.template.filename = match.filename;
         decryptionKey = match.decryptionKey;
@@ -14942,7 +14919,7 @@ var Note = class {
         title = (_k = (_j = this.contentDom.getElementsByTagName("h1")) == null ? void 0 : _j[0]) == null ? void 0 : _k.innerText;
         break;
       case 2 /* Frontmatter property */:
-        title = (_m = (_l = this.meta) == null ? void 0 : _l.frontmatter) == null ? void 0 : _m[this.field(4 /* title */)];
+        title = (_m = (_l = this.meta) == null ? void 0 : _l.frontmatter) == null ? void 0 : _m[this.plugin.field(4 /* title */)];
         break;
     }
     if (!title) {
@@ -14973,30 +14950,33 @@ var Note = class {
       });
     }
     this.template.elements = this.elements;
-    this.template.mathJax = !!this.contentDom.body.innerHTML.match(/<mjx-container/);
+    this.template.mathJax = !!this.contentDom.querySelector("mjx-container");
     this.status.setStatus("Uploading note...");
     let shareLink = await this.plugin.api.createNote(this.template, this.expiration);
-    (0, import_obsidian4.requestUrl)(shareLink).then().catch();
+    void (0, import_obsidian4.requestUrl)({ url: shareLink, throw: false });
     if (shareLink && this.isEncrypted) {
       shareLink += "#" + decryptionKey;
     }
     let shareMessage = "The note has been shared";
     if (shareLink) {
       await this.plugin.app.fileManager.processFrontMatter(file, (frontmatter) => {
-        frontmatter[this.field(0 /* link */)] = shareLink;
-        frontmatter[this.field(1 /* updated */)] = (0, import_obsidian4.moment)().format();
+        frontmatter[this.plugin.field(0 /* link */)] = shareLink;
+        frontmatter[this.plugin.field(1 /* updated */)] = (0, import_obsidian4.moment)().format();
       });
       if (this.plugin.settings.clipboard || this.isForceClipboard) {
         try {
           await navigator.clipboard.writeText(shareLink);
           shareMessage = `${shareMessage} and the link is copied to your clipboard \u{1F4CB}`;
-        } catch (e2) {
+        } catch (_e2) {
         }
         this.isForceClipboard = false;
       }
     }
     this.status.hide();
-    new StatusMessage(shareMessage + `<br><br><a href="${shareLink}">\u2197\uFE0F Open shared note</a>`, 3 /* Success */, 6e3);
+    const successMsg = new StatusMessage(shareMessage, 3 /* Success */, 6e3);
+    if (shareLink) {
+      successMsg.addLink(shareLink, "\u2197\uFE0F Open shared note");
+    }
   }
   /**
    * Upload media attachments
@@ -15013,7 +14993,6 @@ var Note = class {
       }
       const filesource = el.getAttribute("filesource");
       if (filesource == null ? void 0 : filesource.match(/excalidraw/i)) {
-        console.log("Processing Excalidraw drawing...");
         try {
           const excalidraw = this.plugin.app.plugins.getPlugin("obsidian-excalidraw-plugin");
           if (!excalidraw) continue;
@@ -15021,8 +15000,7 @@ var Note = class {
           content = content.outerHTML;
           filetype = "svg";
         } catch (e2) {
-          console.error("Unable to process Excalidraw drawing:");
-          console.error(e2);
+          console.error("[Share Note] Unable to process Excalidraw drawing:", e2);
         }
       } else {
         try {
@@ -15032,7 +15010,7 @@ var Note = class {
             const parsed = new URL(src);
             filetype = parsed.pathname.split(".").pop();
           }
-        } catch (e2) {
+        } catch (_e) {
           continue;
         }
       }
@@ -15063,7 +15041,7 @@ var Note = class {
       this.status.setStatus("Processing CSS...");
       const attachments = this.css.match(/url\s*\(.*?\)/g) || [];
       for (const attachment of attachments) {
-        const assetMatch = attachment.match(/url\s*\(\s*"*(.*?)\s*(?<!\\)"\s*\)/);
+        const assetMatch = attachment.match(/url\s*\(\s*"((?:\\.|[^"\\])*)"\s*\)/);
         if (!assetMatch) continue;
         const assetUrl = (assetMatch == null ? void 0 : assetMatch[1]) || "";
         if (assetUrl.startsWith("data:")) {
@@ -15132,42 +15110,34 @@ var Note = class {
         this.plugin.settings.theme = ((_c = (_b = this.plugin.app) == null ? void 0 : _b.customCss) == null ? void 0 : _c.theme) || "";
         await this.plugin.saveSettings();
       } catch (e2) {
+        console.error("[Share Note] CSS upload failed:", e2);
       }
     }
   }
+  /**
+   * Poll the renderer until enough sections have rendered (or we time out),
+   * then return the concatenated outerHTML of all sections.
+   */
   async querySelectorAll(view) {
     const renderer = view.modes.preview.renderer;
-    let html = "";
-    await new Promise((resolve) => {
-      let count = 0;
-      let parsing = 0;
-      const timer = setInterval(() => {
-        try {
+    const maxTicks = 40;
+    let parsing = 0;
+    for (let count = 0; count < maxTicks; count++) {
+      try {
+        if (renderer.parsing) parsing++;
+        if (count > parsing) {
           const sections = renderer.sections;
-          count++;
-          if (renderer.parsing) parsing++;
-          if (count > parsing) {
-            let rendered = 0;
-            if (sections.length > 12) {
-              sections.slice(sections.length - 7, sections.length - 1).forEach((section) => {
-                if (section.el.innerHTML) rendered++;
-              });
-              if (rendered > 3) count = 100;
-            } else {
-              count = 100;
-            }
-          }
-          if (count > 40) {
-            html = this.reduceSections(renderer.sections);
-            resolve();
-          }
-        } catch (e2) {
-          clearInterval(timer);
-          resolve();
+          if (sections.length <= 12) break;
+          const tail = sections.slice(sections.length - 7, sections.length - 1);
+          const rendered = tail.filter((s2) => s2.el.innerHTML).length;
+          if (rendered > 3) break;
         }
-      }, 100);
-    });
-    return html;
+      } catch (_e) {
+        break;
+      }
+      await new Promise((resolve) => window.setTimeout(resolve, 100));
+    }
+    return this.reduceSections(renderer.sections);
   }
   /**
    * Takes a linkText like 'Some note' or 'Some path/Some note.md' and sees if that note is already shared.
@@ -15179,7 +15149,7 @@ var Note = class {
       const linkedFile = this.plugin.app.metadataCache.getFirstLinkpathDest(linkText, "");
       if (linkedFile instanceof import_obsidian4.TFile) {
         const linkedMeta = this.plugin.app.metadataCache.getFileCache(linkedFile);
-        const href = (_a = linkedMeta == null ? void 0 : linkedMeta.frontmatter) == null ? void 0 : _a[this.field(0 /* link */)];
+        const href = (_a = linkedMeta == null ? void 0 : linkedMeta.frontmatter) == null ? void 0 : _a[this.plugin.field(0 /* link */)];
         if (href && typeof href === "string") {
           if (method === 0 /* ANCHOR */) {
             el.setAttribute("href", href);
@@ -15189,10 +15159,10 @@ var Note = class {
             el.classList.add("force-cursor");
           }
           return true;
+        } else {
         }
       }
-    } catch (e2) {
-      console.error(e2);
+    } catch (_e) {
     }
     return false;
   }
@@ -15249,7 +15219,7 @@ var Note = class {
     if (expiration) {
       const match = expiration.match(/^(\d+) ([a-z]+?)s?$/);
       if (match && whitelist.includes(match[2])) {
-        return parseInt((0, import_obsidian4.moment)().add(+match[1], match[2] + "s").format("x"), 10);
+        return (0, import_obsidian4.moment)().add(+match[1], match[2] + "s").valueOf();
       }
     }
   }
@@ -15258,34 +15228,28 @@ var Note = class {
 // src/UI.ts
 var import_obsidian5 = require("obsidian");
 var ConfirmDialog = class extends import_obsidian5.Modal {
-  constructor(app, onConfirm) {
+  constructor(app, title, body, onConfirm) {
     super(app);
+    this.title = title;
+    this.body = body;
     this.onConfirm = onConfirm;
   }
   onOpen() {
     const { contentEl } = this;
-    if (this.title) {
-      contentEl.createEl("h2", { text: this.title });
-    }
-    if (this.body) {
-      contentEl.createEl("p", { text: this.body });
-    }
-    new import_obsidian5.Setting(contentEl).addButton((btn) => btn.setButtonText("\u{1F5D1}\uFE0F Yes, delete").setCta().onClick(() => {
+    if (this.title) contentEl.createEl("h2", { text: this.title });
+    if (this.body) contentEl.createEl("p", { text: this.body });
+    new import_obsidian5.Setting(contentEl).addButton((btn) => btn.setButtonText("Delete").setCta().onClick(() => {
       this.close();
-      this.onConfirm();
-    })).addButton((btn) => btn.setButtonText("No, cancel").onClick(() => {
-      this.close();
-    }));
+      void this.onConfirm();
+    })).addButton((btn) => btn.setButtonText("Cancel").onClick(() => this.close()));
   }
 };
 var UI = class {
   constructor(app) {
     this.app = app;
   }
-  confirmDialog(title = "", body = "", onConfirm) {
-    const dialog = new ConfirmDialog(this.app, onConfirm);
-    dialog.title = title;
-    dialog.body = body;
+  confirmDialog(title, body, onConfirm) {
+    const dialog = new ConfirmDialog(this.app, title, body, onConfirm);
     dialog.open();
     return dialog;
   }
@@ -15302,7 +15266,7 @@ var SharePlugin = class extends import_obsidian6.Plugin {
   async onload() {
     await this.loadSettings();
     if (!this.settings.uid) {
-      this.settings.uid = await shortHash("" + Date.now() + Math.random());
+      this.settings.uid = await shortHash(`${Date.now()}-${Math.random()}`);
       await this.saveSettings();
     }
     if (this.settings.server === "https://api.obsidianshare.com") {
@@ -15314,29 +15278,32 @@ var SharePlugin = class extends import_obsidian6.Plugin {
     this.api = new API(this);
     this.ui = new UI(this.app);
     this.registerObsidianProtocolHandler("share-note", async (data) => {
+      var _a;
       if (data.action === "share-note" && data.key) {
         this.settings.apiKey = data.key;
         await this.saveSettings();
-        if (this.settingsPage.apikeyEl) {
-          this.settingsPage.apikeyEl.setValue(data.key);
-        }
+        (_a = this.settingsPage.apikeyEl) == null ? void 0 : _a.setValue(data.key);
         if (this.settings.authRedirect === "share") {
-          this.authRedirect(null).then();
-          this.uploadNote().then();
+          void this.authRedirect(null);
+          void this.uploadNote();
         } else {
           new StatusMessage("Plugin successfully connected. You can now start sharing notes!", 3 /* Success */, 6e3);
         }
       }
     });
     this.addCommand({
-      id: "share-note",
+      id: "share",
       name: "Share current note",
-      callback: () => this.uploadNote()
+      callback: () => {
+        void this.uploadNote();
+      }
     });
     this.addCommand({
       id: "force-upload",
       name: "Force re-upload of all data for this note",
-      callback: () => this.uploadNote(true)
+      callback: () => {
+        void this.uploadNote(true);
+      }
     });
     this.addCommand({
       id: "delete-note",
@@ -15346,7 +15313,7 @@ var SharePlugin = class extends import_obsidian6.Plugin {
         if (checking) {
           return !!sharedFile;
         } else if (sharedFile) {
-          this.deleteSharedNote(sharedFile.file);
+          void this.deleteSharedNote(sharedFile.file);
         }
       }
     });
@@ -15358,7 +15325,7 @@ var SharePlugin = class extends import_obsidian6.Plugin {
         if (checking) {
           return file instanceof import_obsidian6.TFile;
         } else if (file) {
-          this.copyShareLink(file);
+          void this.copyShareLink(file);
         }
       }
     });
@@ -15368,7 +15335,9 @@ var SharePlugin = class extends import_obsidian6.Plugin {
           menu.addItem((item) => {
             item.setIcon("globe");
             item.setTitle("Share note on the web");
-            item.onClick(() => this.uploadNote());
+            item.onClick(() => {
+              void this.uploadNote();
+            });
           });
           menu.addItem((item) => {
             item.setIcon("share-2");
@@ -15387,7 +15356,7 @@ var SharePlugin = class extends import_obsidian6.Plugin {
   onunload() {
   }
   async loadSettings() {
-    this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+    this.settings = { ...DEFAULT_SETTINGS, ...await this.loadData() };
   }
   async saveSettings() {
     await this.saveData(this.settings);
@@ -15406,10 +15375,10 @@ var SharePlugin = class extends import_obsidian6.Plugin {
       if (this.settings.shareUnencrypted) {
         note.shareAsPlainText(true);
       }
-      if (((_a = meta == null ? void 0 : meta.frontmatter) == null ? void 0 : _a[note.field(3 /* unencrypted */)]) === true) {
+      if (((_a = meta == null ? void 0 : meta.frontmatter) == null ? void 0 : _a[this.field(3 /* unencrypted */)]) === true) {
         note.shareAsPlainText(true);
       }
-      if (((_b = meta == null ? void 0 : meta.frontmatter) == null ? void 0 : _b[note.field(2 /* encrypted */)]) === true) {
+      if (((_b = meta == null ? void 0 : meta.frontmatter) == null ? void 0 : _b[this.field(2 /* encrypted */)]) === true) {
         note.shareAsPlainText(false);
       }
       if (forceUpload) {
@@ -15421,8 +15390,8 @@ var SharePlugin = class extends import_obsidian6.Plugin {
       try {
         await note.share();
       } catch (e2) {
-        if (e2.message !== "Known error") {
-          console.log(e2);
+        if (!(e2 instanceof HandledError)) {
+          console.error("[Share Note] Upload failed:", e2);
           new StatusMessage("There was an error uploading the note, please try again.", 2 /* Error */);
         }
       }
@@ -15446,7 +15415,7 @@ var SharePlugin = class extends import_obsidian6.Plugin {
     }
     return shareLink;
   }
-  async deleteSharedNote(file) {
+  deleteSharedNote(file) {
     const sharedFile = this.hasSharedFile(file);
     if (sharedFile) {
       this.ui.confirmDialog(
@@ -15465,43 +15434,41 @@ var SharePlugin = class extends import_obsidian6.Plugin {
   }
   addShareIcons() {
     let count = 0;
-    const timer = setInterval(() => {
+    const tick = () => {
       var _a, _b;
       count++;
-      if (count > 8) {
-        clearInterval(timer);
-        return;
-      }
       const activeFile = this.app.workspace.getActiveFile();
-      if (!activeFile) return;
-      const shareLink = (_b = (_a = this.app.metadataCache.getFileCache(activeFile)) == null ? void 0 : _a.frontmatter) == null ? void 0 : _b[this.field(0 /* link */)];
-      if (!shareLink) return;
-      document.querySelectorAll(`div.metadata-property[data-property-key="${this.field(0 /* link */)}"]`).forEach((propertyEl) => {
-        const valueEl = propertyEl.querySelector("div.metadata-property-value");
-        const linkEl = valueEl == null ? void 0 : valueEl.querySelector("div.external-link");
-        if ((linkEl == null ? void 0 : linkEl.innerText) !== shareLink) return;
-        if (valueEl && !valueEl.querySelector("div.share-note-icons")) {
-          const iconsEl = document.createElement("div");
-          iconsEl.classList.add("share-note-icons");
-          const shareIcon = iconsEl.createEl("span");
-          shareIcon.title = "Re-share note";
-          (0, import_obsidian6.setIcon)(shareIcon, "upload-cloud");
-          shareIcon.onclick = () => this.uploadNote();
-          const copyIcon = iconsEl.createEl("span");
-          copyIcon.title = "Copy link to clipboard";
-          (0, import_obsidian6.setIcon)(copyIcon, "copy");
-          copyIcon.onclick = async () => {
-            await navigator.clipboard.writeText(shareLink);
-            new StatusMessage("\u{1F4CB} Shared link copied to clipboard");
-          };
-          const deleteIcon = iconsEl.createEl("span");
-          deleteIcon.title = "Delete shared note";
-          (0, import_obsidian6.setIcon)(deleteIcon, "trash-2");
-          deleteIcon.onclick = () => this.deleteSharedNote(activeFile);
-          valueEl.prepend(iconsEl);
-        }
-      });
-    }, 50);
+      const shareLink = activeFile ? (_b = (_a = this.app.metadataCache.getFileCache(activeFile)) == null ? void 0 : _a.frontmatter) == null ? void 0 : _b[this.field(0 /* link */)] : void 0;
+      if (activeFile && shareLink) {
+        activeDocument.querySelectorAll(`div.metadata-property[data-property-key="${this.field(0 /* link */)}"]`).forEach((propertyEl) => {
+          const valueEl = propertyEl.querySelector("div.metadata-property-value");
+          const linkEl = valueEl == null ? void 0 : valueEl.querySelector("div.external-link");
+          if ((linkEl == null ? void 0 : linkEl.innerText) !== shareLink) return;
+          if (valueEl && !valueEl.querySelector("div.share-note-icons")) {
+            const iconsEl = createDiv({ cls: "share-note-icons" });
+            const shareIcon = iconsEl.createSpan({ attr: { title: "Re-share note" } });
+            (0, import_obsidian6.setIcon)(shareIcon, "upload-cloud");
+            this.registerDomEvent(shareIcon, "click", () => {
+              void this.uploadNote();
+            });
+            const copyIcon = iconsEl.createSpan({ attr: { title: "Copy link to clipboard" } });
+            (0, import_obsidian6.setIcon)(copyIcon, "copy");
+            this.registerDomEvent(copyIcon, "click", async () => {
+              await navigator.clipboard.writeText(shareLink);
+              new StatusMessage("\u{1F4CB} Shared link copied to clipboard");
+            });
+            const deleteIcon = iconsEl.createSpan({ attr: { title: "Delete shared note" } });
+            (0, import_obsidian6.setIcon)(deleteIcon, "trash-2");
+            this.registerDomEvent(deleteIcon, "click", () => {
+              void this.deleteSharedNote(activeFile);
+            });
+            valueEl.prepend(iconsEl);
+          }
+        });
+      }
+      if (count < 8) window.setTimeout(tick, 50);
+    };
+    tick();
   }
   /**
    * Redirect a user back to their position in the flow after they finish the auth.
@@ -15514,23 +15481,17 @@ var SharePlugin = class extends import_obsidian6.Plugin {
   }
   hasSharedFile(file) {
     var _a;
-    if (!file) {
-      file = this.app.workspace.getActiveFile() || void 0;
-    }
-    if (file) {
-      const meta = this.app.metadataCache.getFileCache(file);
-      const shareLink = (_a = meta == null ? void 0 : meta.frontmatter) == null ? void 0 : _a[this.settings.yamlField + "_" + YamlField[0 /* link */]];
-      if (shareLink && parseExistingShareUrl(shareLink)) {
-        return {
-          file,
-          ...parseExistingShareUrl(shareLink)
-        };
-      }
-    }
-    return false;
+    const target = file != null ? file : this.app.workspace.getActiveFile();
+    if (!target) return null;
+    const meta = this.app.metadataCache.getFileCache(target);
+    const shareLink = (_a = meta == null ? void 0 : meta.frontmatter) == null ? void 0 : _a[this.field(0 /* link */)];
+    if (typeof shareLink !== "string") return null;
+    const parsed = parseExistingShareUrl(shareLink);
+    if (!parsed) return null;
+    return { file: target, ...parsed };
   }
   field(key) {
-    return [this.settings.yamlField, YamlField[key]].join("_");
+    return `${this.settings.yamlField}_${YamlField[key]}`;
   }
 };
 

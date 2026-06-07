@@ -279,9 +279,9 @@ console.log("Step 3");
 
 Output:
 
-Step 1
-Step 2
-Step 3
+- Step 1
+- Step 2
+- Step 3
 
 This proves JavaScript waits for execution to finish → synchronous
 behavior.

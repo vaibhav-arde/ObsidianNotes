@@ -1,6 +1,6 @@
 ---
 share_link: https://share.note.sx/qb46f2qe#uzOunQapyuGoEwRkkwNwWKN1K2CfEMLTm5U87vrrx2I
-share_updated: 2026-03-03T11:51:45+05:30
+share_updated: 2026-05-27T08:47:36+05:30
 Author: VaibhaV Arde
 ---
 Let’s cover **Playwright Advanced Locators** in a structured way — covering almost all powerful combinations you’ll use in real automation.

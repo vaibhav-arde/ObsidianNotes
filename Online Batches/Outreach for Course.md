@@ -114,3 +114,23 @@ prospeo
 dinesh@infotech.works
 
 whatsapp group: 
+
+auto
+graphical view 
+computation
+
+test : manual
+automation : selenium java jmeter
+
+cpp : java 
+
+out
+client data: mf4 , 
+decoded ; encoded 
+
+nda 
+
+dev : 
+
+kriosinfosolutions 
+ceo : 

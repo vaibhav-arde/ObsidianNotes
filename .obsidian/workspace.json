@@ -53,14 +53,31 @@
             "id": "2625caa8b7a3aa8a",
             "type": "leaf",
             "state": {
+              "type": "canvas",
+              "state": {
+                "file": "Outreach/Untitled.canvas",
+                "viewState": {
+                  "x": 0,
+                  "y": 0,
+                  "zoom": 0
+                }
+              },
+              "icon": "lucide-layout-dashboard",
+              "title": "Untitled"
+            }
+          },
+          {
+            "id": "2d928b9f0348f313",
+            "type": "leaf",
+            "state": {
               "type": "markdown",
               "state": {
-                "file": "Online Batches/Outreach for Course.md",
+                "file": "Playwright Cohort/Day_01/03_Assignment_Solutions.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Outreach for Course"
+              "title": "03_Assignment_Solutions"
             }
           },
           {
@@ -106,7 +123,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -268,8 +285,22 @@
       "bases:Create new base": false
     }
   },
-  "active": "2625caa8b7a3aa8a",
+  "active": "2d928b9f0348f313",
   "lastOpenFiles": [
+    "Playwright Cohort/Day_01/02_Assignments.md",
+    "Playwright Cohort/Day_01/05_Trainer_Guide.md",
+    "Playwright Cohort/Day_01/03_Assignment_Solutions.md",
+    "Playwright Cohort/Day_01/01_Notes.md",
+    "Playwright Cohort/Roadmap.md",
+    "Playwright Cohort/Day_01/04_For_Students.md",
+    "Online Batches/Playwright AI Automation Comprehensive Curriculum.md",
+    "Playwright Cohort/Day_01",
+    "Playwright Cohort",
+    "Online Batches/Agentic AI Cohort Day wise Curriculum.md",
+    "Outreach/QA Job Outreach.md",
+    "Outreach/Prompt_Guidelines.md",
+    "Outreach/Untitled.canvas",
+    "Online Batches/Outreach for Course.md",
     "Find Your WHY/Find Your WHY.md",
     "Find Your WHY/Images/Pasted image 20260604231645.png",
     "Find Your WHY/Images",
@@ -284,16 +315,11 @@
     "Find Your WHY/Images/Pasted image 20260604225334.png",
     "Find Your WHY/Images/Pasted image 20260604225307.png",
     "Find Your WHY/Images/Pasted image 20260604225127.png",
-    "Online Batches/Outreach for Course.md",
     "Online Batches/Agentic AI Cohort Comprehensive Curriculum.md",
     "Registration Link.md",
-    "Online Batches/Playwright AI Automation Comprehensive Curriculum.md",
-    "Outreach/Prompt_Guidelines.md",
-    "Outreach/Untitled.canvas",
     "Outreach/DAILY_OUTREACH_SYSTEM.md",
     "Online Batches/Images",
     "Online Batches/Evening Batches.md",
-    "Online Batches/Agentic AI Cohort Day wise Curriculum.md",
     "Online Batches",
     "Outreach/OUTBOUND_SCRIPT_FLOW.md",
     "SawanKapoor/Apex Sawan Kapoor.md",
@@ -306,16 +332,8 @@
     "Test.md",
     "Playwright Notes/05 API Automation Basics.md",
     "Playwright Notes/04 Alerts, Dialogs, Popups and Iframes.md",
-    "Playwright Notes/03 Playwright Advance Locators.md",
-    "Outreach/LinkedPost.md",
-    "Outreach/Post Salesforce Automation framework.md",
-    "US Team Python Training/Python for AI Professionals — Topic List to Learn.md",
-    "ClaudeCode/ClaudeCodeNotes.md",
     "SawanKapoor/SKImages",
     "SawanKapoor",
-    "US Team Python Training/Python Detailed Notes.md",
-    "md-to-pdf/Python_for_AI_Professionals_Topic_List.pdf",
-    "GoogleDevPost/Devpost Images",
-    "ClaudeCode/Claude Images"
+    "md-to-pdf/Python_for_AI_Professionals_Topic_List.pdf"
   ]
 }
